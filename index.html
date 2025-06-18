@@ -38,6 +38,7 @@
       margin: 10px 0;
       border: none;
       cursor: pointer;
+      border-radius: 6px;
     }
   </style>
 </head>
@@ -46,7 +47,6 @@
     <h1>CnC-SCRIPTS - 2025 Scripts</h1>
     <h2>Adopt Me Pet Spawner (Equipable) Script</h2>
 
-    <!-- ✅ الصورة مصححة وملفوفة في رابط -->
     <a href="https://ibb.co/gbvpdby3" target="_blank">
       <img src="https://i.ibb.co/gbvpdby3/Chat-GPT-Image-Jun-17-2025-at-11-51-26-AM.png" alt="Pet Spawner UI">
     </a>
@@ -59,11 +59,29 @@
   </div>
 
   <script>
-    function copyScript() {
-      const script = "loadstring(game:HttpGet("https://raw.githubusercontent.com/Universal-Script/PETSPAWNER/refs/heads/main/ADM"))()";
-      navigator.clipboard.writeText(script).then(() => {
-        alert("Script copied!");
-      });
+    async function copyScript() {
+      const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/Universal-Script/PETSPAWNER/refs/heads/main/ADM"))()';
+
+      // Clipboard API (حديثة)
+      try {
+        await navigator.clipboard.writeText(script);
+        alert("Script copied successfully!");
+      } catch (err) {
+        // Fallback method (أجهزة أو متصفحات قديمة)
+        const textarea = document.createElement("textarea");
+        textarea.value = script;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = 0;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand("copy");
+          alert("Script copied (fallback method)!");
+        } catch (fallbackErr) {
+          alert("Failed to copy the script. Please copy manually.");
+        }
+        document.body.removeChild(textarea);
+      }
     }
   </script>
 </body>
